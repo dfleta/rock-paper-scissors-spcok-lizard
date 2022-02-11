@@ -29,7 +29,7 @@ class GameResult(IntEnum):
 
 Victories = {
     GameAction.Rock: GameAction.minus(GameAction.Scissors, GameAction.Lizard),
-    GameAction.Paper: { GameAction.Scissors },
+    GameAction.Paper: GameAction.minus(GameAction.Scissors, GameAction.Spock),
     GameAction.Scissors: GameAction.minus(GameAction.Paper, GameAction.Lizard),
     GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
     GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper)
