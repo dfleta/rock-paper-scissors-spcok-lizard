@@ -10,14 +10,15 @@ class GameAction(IntEnum):
     Paper = 1
     Scissors = 2
     Spock = 3
+    Lizard = 4
 
     @classmethod
     def values(cls):
         return [action for action in GameAction]
     
     @classmethod
-    def minus(cls, action):
-        return set(cls.values()) - { action }
+    def minus(cls, *actions):
+        return set(cls.values()) - { action for action in actions }
 
 
 class GameResult(IntEnum):
@@ -27,10 +28,11 @@ class GameResult(IntEnum):
 
 
 Victories = {
-    GameAction.Rock: GameAction.minus(GameAction.Scissors),
+    GameAction.Rock: GameAction.minus(GameAction.Scissors, GameAction.Lizard),
     GameAction.Paper: { GameAction.Scissors },
-    GameAction.Scissors: GameAction.minus(GameAction.Paper),
-    GameAction.Spock: { GameAction.Paper }
+    GameAction.Scissors: GameAction.minus(GameAction.Paper, GameAction.Lizard),
+    GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
+    GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper)
 }
 
 
