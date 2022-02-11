@@ -9,7 +9,15 @@ class GameAction(IntEnum):
     Rock = 0
     Paper = 1
     Scissors = 2
-    # Spock = 3
+    Spock = 3
+
+    @classmethod
+    def values(cls):
+        return [action for action in GameAction]
+    
+    @classmethod
+    def minus(cls, action):
+        return set(cls.values()) - { action }
 
 
 class GameResult(IntEnum):
@@ -19,10 +27,10 @@ class GameResult(IntEnum):
 
 
 Victories = {
-    GameAction.Rock: GameAction.Paper,
-    GameAction.Paper: GameAction.Scissors,
-    GameAction.Scissors: GameAction.Rock,
-    # GameAction.Spock: GameAction.Paper
+    GameAction.Rock: GameAction.minus(GameAction.Scissors),
+    GameAction.Paper: { GameAction.Scissors },
+    GameAction.Scissors: GameAction.minus(GameAction.Paper),
+    GameAction.Spock: { GameAction.Paper }
 }
 
 
@@ -35,9 +43,11 @@ def assess_game(user_action, computer_action):
     if user_action == computer_action:
         print(f"User and computer picked {user_action.name}. Draw game!")
         game_result = GameResult.Tie
-    elif Victories[user_action] == computer_action:
+
+    elif computer_action in Victories[user_action]:
         print("%s wins %s. You lost!" %(computer_action.name, user_action.name))
         game_result = GameResult.Defeat
+
     else:
         print("%s wins %s. You win!" %(user_action.name, computer_action.name))
         game_result = GameResult.Victory
@@ -48,7 +58,7 @@ def assess_game(user_action, computer_action):
 def get_computer_action(user_actions_history, game_history):
     # No previous user actions => random computer choice
     if not user_actions_history or not game_history:
-        computer_action = get_random_computer_action()
+        computer_action = get_random_computer_action(GameAction)
     # Alternative AI functionality
     # Choice that would beat the user's most frequent recent choice
     else:
@@ -70,15 +80,16 @@ def get_user_action():
     return user_action
 
 
-def get_random_computer_action():
-    computer_selection = random.randint(0, len(GameAction) - 1)
-    computer_action = GameAction(computer_selection)
+def get_random_computer_action(options):
+    computer_selection = random.randint(0, len(options) - 1)
+    computer_action = list(options)[computer_selection]
 
     return computer_action
 
 
 def get_winner_action(game_action):
-    return Victories[game_action]
+    winner_actions = Victories[game_action]
+    return get_random_computer_action(winner_actions)    
 
 
 def play_another_round():
