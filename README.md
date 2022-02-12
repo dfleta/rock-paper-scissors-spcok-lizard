@@ -42,3 +42,11 @@ Para seleccionar sólo los casos test de la lógica extendida:
 $ pytest -v -k lizard
 $ pytest -v -k spock
 ```
+
+## AIML
+
+He simplicado la salida por consola de la app al mensaje:
+
+`"%s wins %s. You lost!" %(computer_action.name, user_action.name)`
+
+Es posible implementar las salidas de la aplicación de una manera más explícita usando un fichero `.aiml` y accediendo a los elementos XML con el módulo `xml.etree.ElementTree`. Implementaré esta extensióm a lo largo de esta semana.
