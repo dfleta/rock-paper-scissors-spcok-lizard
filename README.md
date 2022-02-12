@@ -34,3 +34,11 @@ En todo proceso de refactorización de código es necesario incluir un conunto d
 
 Aunque no he practicado TDD estricta (que es como suelo codificar), he incluído casos test para eliminar defectos del código cuando he estimado que la lógica estaba completada.
 
+Es necesario contar con `pytest` instalado en el entorno virtual.
+
+Para seleccionar sólo los casos test de la lógica extendida: 
+
+```bash
+$ pytest -v -k lizard
+$ pytest -v -k spock
+```
