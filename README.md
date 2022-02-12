@@ -1,8 +1,8 @@
-Práctica curso Programacion para IA
+Práctica curso Programación para IA
 ===================================
 
-Partiendo del código disponible en `05_RPS_More_AI.py`, añada la funcionalidad necesaria para
-ofrecer la variante lagarto, Spock del juego piedra, papel o tijeras.
+Extender el código disponible en `05_RPS_More_AI.py` con la funcionalidad necesaria para
+implementar la variante lagarto - Spock del juego piedra, papel o tijeras.
 
 [Práctica curso Programacion para IA](#práctica-curso-programacion-para-ia)
   - [Solución](#solución)
