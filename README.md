@@ -22,11 +22,12 @@ La inclusión de nuevas categorías en el juego original produce una extensión 
 
 Podría haber optado por eliminar la cláusula `if-elif-else` implementando polimorfismo de clase, pero he optado por expresar en el diccionario `Victories` -que ya estaba implementado en el código inicial- las reglas de la lógica del juego de manera declarativa, para mejorar la legibilidad del código. 
 
-No es una solución 100% OCP puesto que si las categorías del juego aumentan no sería viable extender el diccionario, pero confiemos en que la serie _Big Bang Theory_ no goce de una continuación y aumenten el juego con nuevas acciones ;) 
+No es una solución 100% OCP puesto que si las categorías del juego aumentan no sería viable extender el diccionario, pero confiemos en que la serie _Big Bang Theory_ no goce de una secuela y aumenten el juego con nuevas acciones ;) 
 
-Para ello, he extendido el comportamiento del tipo enumerado `GameAction` implementando lógica de conjuntos (tipo `set` de Python).
+Para ello, he extendido el comportamiento del tipo enumerado `GameAction` simulando la diferencia de conjuntos en la función `minus(excluded_actions)`. Podría haber usado el tipo `set` de Python pero rompia la interfaz `list` necesaria en la función `get_random_computer_action()`. 
 
-Por este motivo, he tenido que refactorizar la función `get_random_computer_action()` para pasar los conjuntos de Python a una estructura accesible por posición (una lista).
+He refactorizado la función `get_random_computer_action()` para reutilizarla en `get_winner_action(game_action)`.
+
 
 ## Testing
 

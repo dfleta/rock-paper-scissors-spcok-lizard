@@ -11,15 +11,11 @@ class GameAction(IntEnum):
     Scissors = 2
     Spock = 3
     Lizard = 4
-
+   
     @classmethod
-    def values(cls):
-        return [action for action in GameAction]
-    
-    @classmethod
-    def minus(cls, *actions):
-        return set(cls.values()) - { action for action in actions }
-
+    def minus(cls, *actions_excluded):
+        return [ action for action in GameAction if action not in actions_excluded ]
+        
 
 class GameResult(IntEnum):
     Victory = 0
@@ -82,9 +78,9 @@ def get_user_action():
     return user_action
 
 
-def get_random_computer_action(options):
-    computer_selection = random.randint(0, len(options) - 1)
-    computer_action = list(options)[computer_selection]
+def get_random_computer_action(actions):
+    computer_selection = random.randint(0, len(actions) - 1)
+    computer_action = actions[computer_selection]
 
     return computer_action
 
