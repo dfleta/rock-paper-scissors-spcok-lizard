@@ -167,4 +167,10 @@ def test_minus_action():
         game.GameAction.Paper,
         game.GameAction.Rock))
     
-    assert 4 == len (game.GameAction.minus(game.GameAction.Lizard))
+    assert 4 == len(game.GameAction.minus(game.GameAction.Lizard))
+
+    assert game.GameAction.Lizard not in game.GameAction.minus(game.GameAction.Lizard)
+
+    assert game.GameAction.Lizard in game.GameAction.minus(
+                                        game.GameAction.Spock, 
+                                        game.GameAction.Rock)

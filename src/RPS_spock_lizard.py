@@ -11,15 +11,11 @@ class GameAction(IntEnum):
     Scissors = 2
     Spock = 3
     Lizard = 4
-
+   
     @classmethod
-    def values(cls):
-        return [action for action in GameAction]
-    
-    @classmethod
-    def minus(cls, *actions):
-        return set(cls.values()) - { action for action in actions }
-
+    def minus(cls, *actions_excluded):
+        return { action for action in GameAction if action not in actions_excluded }
+        
 
 class GameResult(IntEnum):
     Victory = 0
