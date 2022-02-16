@@ -80,7 +80,10 @@ def get_user_action():
 
 def get_random_computer_action(actions):
     computer_selection = random.randint(0, len(actions) - 1)
-    computer_action = actions[computer_selection]
+    try:
+        computer_action = actions(computer_selection) # dict necesita (0) o ["Rock"]
+    except TypeError:
+        computer_action = actions[computer_selection]
 
     return computer_action
 
