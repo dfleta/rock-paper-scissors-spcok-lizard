@@ -28,6 +28,8 @@ Para ello, he extendido el comportamiento del tipo enumerado `GameAction` simula
 
 He refactorizado la función `get_random_computer_action()` para reutilizarla en `get_winner_action(game_action)`.
 
+Finalmente, he encapsulado la lógica el juego en la clase `Game`. He decidido no usar una clase con métodos estáticos para poder generar distintas instancias del juego. 
+
 
 ## Testing
 
