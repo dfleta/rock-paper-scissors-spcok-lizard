@@ -42,8 +42,8 @@ Es necesario contar con `pytest` instalado en el entorno virtual.
 Para seleccionar sólo los casos test de la lógica extendida: 
 
 ```bash
-$ pytest -v -k lizard
-$ pytest -v -k spock
+$ pytest -v -m lizard
+$ pytest -v -m spock
 ```
 
 ## AIML
