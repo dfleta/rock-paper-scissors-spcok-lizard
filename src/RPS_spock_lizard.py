@@ -11,11 +11,11 @@ class GameAction(IntEnum):
     Scissors = 2
     Spock = 3
     Lizard = 4
-   
+
     @classmethod
     def minus(cls, *actions_excluded):
         return [ action for action in GameAction if action not in actions_excluded ]
-        
+
 
 class GameResult(IntEnum):
     Victory = 0
@@ -45,7 +45,7 @@ class Game:
 
     def assess_game(self, user_action, computer_action):
         game_result = None
-        
+
         if user_action == computer_action:
             print(f"User and computer picked {user_action.name}. Draw game!")
             game_result = GameResult.Tie
@@ -60,7 +60,7 @@ class Game:
 
         return game_result
 
-                
+
     def get_computer_action(self):
         
         NUMBER_RECENT_ACTIONS = 5
@@ -75,9 +75,9 @@ class Game:
             computer_action = self.get_winner_action(most_frequent_recent_computer_action)
 
         print(f"Computer picked {computer_action.name}.")
-        
+
         return computer_action
-                
+
 
     def get_user_action(self):
         # Scalable to more options (beyond rock, paper and scissors...)
@@ -85,7 +85,7 @@ class Game:
         game_choices_str = ", ".join(game_choices)
         user_selection = int(input(f"\nPick a choice ({game_choices_str}): "))
         user_action = GameAction(user_selection)
-        
+
         return user_action
 
 
@@ -128,7 +128,7 @@ class Game:
 
 
 if __name__ == "__main__":
-    
+
     game = Game()
     game.play()
     
