@@ -51,11 +51,11 @@ class Game:
             game_result = GameResult.Tie
 
         elif computer_action in self.victories[user_action]:
-            print("%s wins %s. You lost!" %(computer_action.name, user_action.name))
+            print(f"{computer_action.name} wins {user_action.name}. You lost!")
             game_result = GameResult.Defeat
 
         else:
-            print("%s wins %s. You win!" %(user_action.name, computer_action.name))
+            print(f"{user_action.name} wins {computer_action.name}. You win!")
             game_result = GameResult.Victory
 
         return game_result
