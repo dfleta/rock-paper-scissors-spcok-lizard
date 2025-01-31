@@ -12,7 +12,7 @@ class GameAction(IntEnum):
 
     @classmethod
     def minus(cls, *actions_excluded):
-        return [ action for action in GameAction if action not in actions_excluded ]
+        return [action for action in GameAction if action not in actions_excluded]
 
 
 class GameResult(IntEnum):
@@ -32,7 +32,7 @@ class Game:
             GameAction.Paper: GameAction.minus(GameAction.Spock, GameAction.Rock),
             GameAction.Scissors: GameAction.minus(GameAction.Paper, GameAction.Lizard),
             GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
-            GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper)
+            GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper),
         }
 
     def user_actions_history_append(self, action):
@@ -58,7 +58,6 @@ class Game:
 
         return game_result
 
-
     def get_computer_action(self):
 
         NUMBER_RECENT_ACTIONS = 5
@@ -69,23 +68,27 @@ class Game:
         # Alternative AI functionality
         # Choice that would beat the user's most frequent recent choice
         else:
-            most_frequent_recent_computer_action = GameAction(mode(self.user_actions_history[-NUMBER_RECENT_ACTIONS:]))
-            computer_action = self.get_winner_action(most_frequent_recent_computer_action)
+            most_frequent_recent_computer_action = GameAction(
+                mode(self.user_actions_history[-NUMBER_RECENT_ACTIONS:])
+            )
+            computer_action = self.get_winner_action(
+                most_frequent_recent_computer_action
+            )
 
         print(f"Computer picked {computer_action.name}.")
 
         return computer_action
 
-
     def get_user_action(self):
         # Scalable to more options (beyond rock, paper and scissors...)
-        game_choices = [f"{game_action.name}[{game_action.value}]" for game_action in GameAction]
+        game_choices = [
+            f"{game_action.name}[{game_action.value}]" for game_action in GameAction
+        ]
         game_choices_str = ", ".join(game_choices)
         user_selection = int(input(f"\nPick a choice ({game_choices_str}): "))
         user_action = GameAction(user_selection)
 
         return user_action
-
 
     def get_random_computer_action(self, actions):
         computer_selection = random.randint(0, len(actions) - 1)
@@ -96,16 +99,13 @@ class Game:
 
         return computer_action
 
-
     def get_winner_action(self, game_action):
         winner_actions = self.victories[game_action]
         return self.get_random_computer_action(winner_actions)
 
-
     def play_another_round(self):
         another_round = input("\nAnother round? (y/n): ")
-        return another_round.lower() == 'y'
-
+        return another_round.lower() == "y"
 
     def play(self):
         while True:
