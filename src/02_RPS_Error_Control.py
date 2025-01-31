@@ -36,7 +36,7 @@ def assess_game(user_action, computer_action):
             print("Rock smashes scissors. You lost!")
         else:
             print("Scissors cuts paper. You won!")
-        
+
 
 
 def main():

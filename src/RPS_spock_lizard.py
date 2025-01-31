@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import random
 from enum import IntEnum
 from statistics import mode
@@ -62,7 +60,7 @@ class Game:
 
 
     def get_computer_action(self):
-        
+
         NUMBER_RECENT_ACTIONS = 5
 
         # No previous user actions => random computer choice
@@ -101,7 +99,7 @@ class Game:
 
     def get_winner_action(self, game_action):
         winner_actions = self.victories[game_action]
-        return self.get_random_computer_action(winner_actions)    
+        return self.get_random_computer_action(winner_actions)
 
 
     def play_another_round(self):
@@ -131,4 +129,3 @@ if __name__ == "__main__":
 
     game = Game()
     game.play()
-    
