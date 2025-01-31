@@ -4,21 +4,23 @@ from statistics import mode
 
 
 class GameAction(IntEnum):
-    Rock = 0
-    Paper = 1
-    Scissors = 2
-    Spock = 3
-    Lizard = 4
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
+    SPOCK = 3
+    LIZARD = 4
 
     @classmethod
     def minus(cls, *actions_excluded):
-        return [action for action in GameAction if action not in actions_excluded]
+        return [
+            action for action in GameAction if action not in actions_excluded
+        ]
 
 
 class GameResult(IntEnum):
-    Victory = 0
-    Defeat = 1
-    Tie = 2
+    VICTORY = 0
+    DEFEAT = 1
+    TIE = 2
 
 
 class Game:
@@ -28,11 +30,21 @@ class Game:
         self.user_actions_history = []
 
         self.victories = {
-            GameAction.Rock: GameAction.minus(GameAction.Scissors, GameAction.Lizard),
-            GameAction.Paper: GameAction.minus(GameAction.Spock, GameAction.Rock),
-            GameAction.Scissors: GameAction.minus(GameAction.Paper, GameAction.Lizard),
-            GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
-            GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper),
+            GameAction.ROCK: GameAction.minus(
+                GameAction.SCISSORS, GameAction.LIZARD
+            ),
+            GameAction.PAPER: GameAction.minus(
+                GameAction.SPOCK, GameAction.ROCK
+            ),
+            GameAction.SCISSORS: GameAction.minus(
+                GameAction.PAPER, GameAction.LIZARD
+            ),
+            GameAction.SPOCK: GameAction.minus(
+                GameAction.SCISSORS, GameAction.ROCK
+            ),
+            GameAction.LIZARD: GameAction.minus(
+                GameAction.SPOCK, GameAction.PAPER
+            ),
         }
 
     def user_actions_history_append(self, action):
@@ -46,15 +58,15 @@ class Game:
 
         if user_action == computer_action:
             print(f"User and computer picked {user_action.name}. Draw game!")
-            game_result = GameResult.Tie
+            game_result = GameResult.TIE
 
         elif computer_action in self.victories[user_action]:
             print(f"{computer_action.name} wins {user_action.name}. You lost!")
-            game_result = GameResult.Defeat
+            game_result = GameResult.DEFEAT
 
         else:
             print(f"{user_action.name} wins {computer_action.name}. You win!")
-            game_result = GameResult.Victory
+            game_result = GameResult.VICTORY
 
         return game_result
 
@@ -82,7 +94,8 @@ class Game:
     def get_user_action(self):
         # Scalable to more options (beyond rock, paper and scissors...)
         game_choices = [
-            f"{game_action.name}[{game_action.value}]" for game_action in GameAction
+            f"{game_action.name}[{game_action.value}]"
+            for game_action in GameAction
         ]
         game_choices_str = ", ".join(game_choices)
         user_selection = int(input(f"\nPick a choice ({game_choices_str}): "))
@@ -115,7 +128,9 @@ class Game:
                 self.user_actions_history_append(user_action)
             except ValueError:
                 range_str = f"[0, {len(GameAction) - 1}]"
-                print(f"Invalid selection. Pick a choice in range {range_str}!")
+                print(
+                    f"Invalid selection. Pick a choice in range {range_str}!"
+                )
                 continue
 
             game_result = self.assess_game(user_action, computer_action)
