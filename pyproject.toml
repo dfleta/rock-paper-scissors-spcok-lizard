@@ -1,8 +1,17 @@
+## PYLINT
 # Instala la extension para VSCOde even-better-toml
 # Genera el fichero .toml con el comando "pylint --generate-rcfile > pyproject.toml"
+# https://pylint.readthedocs.io/en/v2.17.7/tutorial.html
 
+## Black
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
+# Black is using the [tool.black] section. 
+# The option keys are the same as long names of options on the command line.
+# Chequear sin grabar:
+#   black --diff --color src/RPS_spock_lizard.py
 
-[tool.pylint.main]
+[tool.black]
+line-length = 79
 
 
 [tool.pylint.basic]
